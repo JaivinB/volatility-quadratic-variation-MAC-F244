@@ -1,0 +1,148 @@
+\documentclass[12pt,a4paper]{extarticle}
+\usepackage[margin=1.0cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\setlength{\parskip}{0.30em}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\definecolor{cK}{HTML}{1B5E20}\definecolor{cKb}{HTML}{E8F5E9}
+\definecolor{cT}{HTML}{B71C1C}\definecolor{cTb}{HTML}{FFEBEE}
+\definecolor{cQ}{HTML}{1F4E79}\definecolor{cQb}{HTML}{F0F5FA}
+
+\newtcolorbox{kb}[1][]{enhanced,colback=cKb,colframe=cK,boxrule=0.6pt,
+  left=3pt,right=3pt,top=2pt,bottom=2pt,arc=1pt,
+  fonttitle=\bfseries\footnotesize,coltitle=black,title={#1}}
+\newtcolorbox{tb}[1][]{enhanced,colback=cTb,colframe=cT,boxrule=0.6pt,
+  left=3pt,right=3pt,top=2pt,bottom=2pt,arc=1pt,
+  fonttitle=\bfseries\footnotesize,title={#1}}
+\newtcolorbox{qb}[1][]{enhanced,colback=cQb,colframe=cQ,boxrule=0.6pt,
+  left=3pt,right=3pt,top=2pt,bottom=2pt,arc=1pt,
+  fonttitle=\bfseries\footnotesize,coltitle=black,title={#1}}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\si}{\sigma_{\mathrm{imp}}}
+
+\begin{document}
+\begin{center}
+{\large\bfseries MAC F244 Viva: what every member must be able to say}\\
+{\footnotesize Volatility as a quadratic variation, NIFTY 50. Read this twice before you walk in.}
+\end{center}
+\vspace{-0.3em}
+
+\begin{multicols}{2}
+
+\begin{kb}[The project in three sentences]
+\footnotesize
+Black--Scholes needs a volatility nobody can observe. It\^o's lemma applied to $\log S$ shows
+that volatility \emph{is} the quadratic variation of the log price, so it can be measured from
+one path instead of guessed. We verify that measurement where the answer is known, apply it to
+eleven years of NIFTY~50, show the options market over-forecasts volatility, and confirm that
+the resulting profit is exactly the one It\^o predicts.
+\end{kb}
+
+\textbf{\footnotesize The identity everything rests on}
+\vspace{-0.4em}
+\[[\log S]_T=\int_0^T\sigma_t^2\,\dd t,\qquad RV_n=\sum(\Delta\log S)^2\]
+\vspace{-1.2em}
+\textbf{\footnotesize The P\&L identity}
+\vspace{0.5em}
+\[\Pi_T=\half\int_0^T e^{r(T-t)}S_t^2\Gamma_t\big(\si^2-\sigma_t^2\big)\dd t\]
+\vspace{-1.0em}
+
+{\footnotesize Derived from self-financing $+$ It\^o $+$ the Black--Scholes PDE. The $\dd W$
+terms cancel because $\Delta=V_S$.}
+
+\begin{kb}[The numbers. Know these cold.]
+\scriptsize
+\begin{tabular}{@{}ll@{}}
+Data & 2,903 days, Jan 2015 to Nov 2026\\
+Convergence slope & $-0.4986$ (theory $-1/2$)\\
+Dispersion ratio & $0.991$ to $1.021$\\
+Ljung--Box $Q(10)$ & $1752$ squared vs $23.2$ crit.\\
+Leverage corr & $-0.200$\\
+MZ slope $b$ & $0.664$, $t_{b=1}=-3.70$\\
+\textbf{It\^o vs actual P\&L} & $\mathbf{corr=+0.949}$\\
+Backtest & $+36.06$ pts/cycle, $t=4.80$\\
+Jump test & $Z=+1.617$, below $1.96$\\
+\end{tabular}
+\end{kb}
+
+\begin{qb}[Q: ``Why use a model from 1973?'']
+\scriptsize
+The model is a \textbf{measurement framework}, not a claim about reality. The P\&L identity
+comes from self-financing accounting plus It\^o plus the PDE. The $\sigma_t$ in it is the
+\textbf{realised} volatility of whatever path actually happened. It never uses normality,
+independence, or constant $\sigma$. We \emph{measured} the three ways the NIFTY breaks the
+model (clustering, asymmetry, fat tails) and the identity still holds at $0.949$ on that same
+data. \textbf{A model can be wrong about the distribution of returns and still be exactly right
+about the accounting.}
+\end{qb}
+
+\columnbreak
+
+\begin{qb}[Q: ``Which numerical methods did you use?'']
+\scriptsize
+Exact log-solution of GBM (so zero discretisation error) \textbullet\ Monte Carlo with a fixed
+seed \textbullet\ closed-form Black--Scholes price, delta, gamma \textbullet\ central finite
+differences, to verify the Greeks only \textbullet\ trapezoidal quadrature for the It\^o
+integral \textbullet\ left-endpoint Riemann sums, as the It\^o convention requires \textbullet\
+ordinary least squares written out by hand.
+
+\textbf{If asked about Milstein:} in log coordinates $\sigma(t)$ is state-independent, so
+$b'=0$ and the correction term vanishes. Milstein reduces to Euler here.
+\end{qb}
+
+\begin{tb}[Q: ``Did you use neural networks / PINNs?'']
+\scriptsize
+\textbf{No. None. Not anywhere.} There is no \texttt{torch}, \texttt{tensorflow},
+\texttt{keras} or \texttt{sklearn} in the repository. This project is closed-form mathematics
+plus Monte Carlo. \textbf{Nobody should hesitate on this question.}
+\end{tb}
+
+\begin{qb}[Q: ``Where is this used in the real world?'']
+\scriptsize
+Variance swaps are priced directly off this identity \textbullet\ the VIX is itself a
+variance-swap calculation, which is why India VIX is the right thing to regress against
+\textbullet\ an options market-maker's daily gamma P\&L is explained by this exact
+decomposition \textbullet\ dispersion trading and vol-targeting funds harvest the same premium
+\textbullet\ Carr and Wu (2009) document the variance risk premium across markets.
+\end{qb}
+
+\begin{qb}[Q: ``Is the data real?'']
+\scriptsize
+Yes. NIFTY~50 and India VIX daily closes, spot-checked against known history: the COVID bottom
+of $7{,}610$ on 23 Mar 2020 and the India VIX spike to $84.6$ are both in the file. The
+\textbf{simulated} paths appear only in the verification stage, deliberately, because testing
+an estimator requires a case where the true answer is known in advance.
+\end{qb}
+
+\begin{tb}[Three things never to say]
+\scriptsize
+\textbf{1. Never claim an optimal rebalance frequency.} At zero cost the means are not
+statistically distinguishable (spread $22.5$ against s.e.\ $11.9$). Frequency buys lower
+dispersion, not a higher mean.
+
+\textbf{2. Never say the premiums are market quotes.} They are Black--Scholes evaluated at
+India VIX. Volunteer this before he asks.
+
+\textbf{3. Never guess.} ``That part was done by X, let them answer'' costs far less than a
+confident wrong answer.
+\end{tb}
+
+\begin{kb}[Volunteer these weaknesses first]
+\scriptsize
+The option premium is reconstructed, not quoted, so the P\&L \emph{level} inherits the model
+(the measurement results do not) \textbullet\ costs are modelled, not measured \textbullet\
+daily closes only, so the jump test's asymptotics are weak \textbullet\ one index,
+at-the-money calls, flat $r$. The natural next version is the NSE option chain with its
+bid--ask.
+\end{kb}
+
+\end{multicols}
+\end{document}
