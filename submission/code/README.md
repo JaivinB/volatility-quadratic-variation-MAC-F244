@@ -94,6 +94,7 @@ python sc_figures.py    # figures
 
 latexmk -pdf SC_Report.tex
 latexmk -pdf SC_Explained.tex
+latexmk -xelatex SC_Slides.tex     # xelatex: the deck uses system fonts
 ```
 
 Monte Carlo uses a fixed seed, so the convergence and simulation numbers are
