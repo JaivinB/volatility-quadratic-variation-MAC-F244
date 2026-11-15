@@ -63,6 +63,7 @@ between stages.
 | File | |
 |---|---|
 | `SC_Report.pdf` | The 4-page submitted report (hard limit per the spec). |
+| `SC_Slides.pdf` | 16-frame presentation for the 15-20 minute viva. |
 | `SC_Explained.pdf` | 22-page companion: where the idea came from, the theory with its class-hours provenance, exactly which numerical methods were and were not used, real-world uses, a per-figure walkthrough, the viva defence, and an honest account of what is weak. |
 
 ## Code

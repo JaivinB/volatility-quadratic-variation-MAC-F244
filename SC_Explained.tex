@@ -20,7 +20,7 @@
 \large Volatility as a quadratic variation on the NIFTY~50\\[4pt]
 \normalsize What it is, where the idea came from, what data we used and how we got it,\\
 the theory behind every step, and which parts came out of class}
-\author{MAC F244 --- Prof.\ Mayank Goel \textbullet\ BITS Goa \textbullet\ companion to \texttt{SC\_Report.pdf}}
+\author{MAC F244, Prof.\ Mayank Goel \textbullet\ BITS Goa \textbullet\ companion to \texttt{SC\_Report.pdf}}
 \date{15 November 2026}
 
 \begin{document}
@@ -43,10 +43,10 @@ decision, every number and every figure, in the order a person would actually as
 \section{Purpose, and the project in one page}
 
 \textbf{The purpose.} Black--Scholes needs five inputs, and four of them are directly
-observable. The fifth, $\sigma$, is not --- the derivation done in class simply assumes it. The
+observable. The fifth, $\sigma$, is not, the derivation done in class simply assumes it. The
 purpose of this project is to show that It\^o calculus removes that asymmetry, because the same
 identity $(\dd W)^2=\dd t$ that puts $\half\sigma^2S^2V_{SS}$ into the Black--Scholes PDE also
-makes $\sigma$ the quadratic variation of $\log S$ --- and quadratic variation is computable
+makes $\sigma$ the quadratic variation of $\log S$, and quadratic variation is computable
 from an observed path. Volatility stops being a free parameter and becomes a measurement.
 \smallskip
 \textbf{In one sentence.} This project verifies that claim, measures NIFTY volatility that way,
@@ -55,27 +55,27 @@ to establish exactly what that error is worth in rupees.
 
 \textbf{What the project does.} Three stages, each a prerequisite for the next.
 \begin{itemize}[leftmargin=*,topsep=1pt,itemsep=2pt]
-\item \textbf{Verification --- establishing that the instrument is accurate.} We derive that
+\item \textbf{Verification, establishing that the instrument is accurate.} We derive that
       $RV_n=\sum(\Delta\log S)^2$ should converge to $\int_0^T\sigma_t^2\dd t$, and that its
       error should have standard deviation $\sqrt{(2T/n)\int\sigma^4\dd t}$. Then we simulate
       paths where we \emph{chose} $\sigma(t)$, so we know the right answer, and check.
       \textbf{Result:} slope $-0.4986$ vs theoretical $-0.5$, and the dispersion matches the
       formula to within $2.1\%$ across a $128\times$ range of sampling frequency.
-\item \textbf{Measurement --- characterising NIFTY volatility.} The verified instrument is
+\item \textbf{Measurement, characterising NIFTY volatility.} The verified instrument is
       applied to 11 years of NIFTY~50. \textbf{Result:} volatility ranges $5.4\%$--$88.5\%$, is massively
       autocorrelated (Ljung--Box $Q(10)=1752$ against a critical value of $23.2$), and rises
       when the market falls (correlation $-0.200$). Constant-$\sigma$ GBM is wrong, and we can
       say precisely how.
-\item \textbf{Valuation --- pricing the market's forecast error.} Realised volatility is
+\item \textbf{Valuation, pricing the market's forecast error.} Realised volatility is
       regressed on India VIX. \textbf{Result:} slope $0.664$ not $1$
-      ($t_{b=1}=-3.70$) --- the market \emph{overreacts}. The resulting gap is $+2.50$
+      ($t_{b=1}=-3.70$), the market \emph{overreacts}. The resulting gap is $+2.50$
       volatility points. It\^o's lemma says a delta-hedged short option converts that gap into
       P\&L, and on 138 months the It\^o prediction tracks realised P\&L at
       \textbf{correlation $+0.949$}.
 \end{itemize}
 
 \begin{whybox}[Why the three stages have to come in this order]
-They are not three topics that happen to share a dataset --- each one earns the right to the
+They are not three topics that happen to share a dataset, each one earns the right to the
 next. \textbf{Measurement is worthless without verification}: if you had not established that
 $RV_n$ estimates $\int\sigma^2\dd t$ accurately, then ``NIFTY volatility ranges from $5\%$ to
 $88\%$'' could just be estimator noise rather than a fact about the index.
@@ -83,7 +83,7 @@ $88\%$'' could just be estimator noise rather than a fact about the index.
 volatility requires that the realised side actually means something.
 \smallskip
 And the payoff runs back the other way. The P\&L identity holds on real NIFTY paths precisely
-\emph{because} the only thing it needs from the model is the quadratic variation --- the one
+\emph{because} the only thing it needs from the model is the quadratic variation, the one
 object the first stage proved we can measure. That is also the answer to the hardest question
 you will be asked; see \S\ref{sec:defence}.
 \end{whybox}
@@ -94,8 +94,8 @@ you will be asked; see \S\ref{sec:defence}.
 \begin{qabox}[Purpose: why this topic, and what it is meant to establish]
 The course ends at Black--Scholes. Sitting inside Black--Scholes is a parameter, $\sigma$,
 that the derivation treats as known and the real world does not supply. I wanted to take the
-one tool the course actually gives you for that problem --- the fact that
-$[\log S]_T=\int\sigma^2\dd t$ --- and push it as far as it goes: first to check it is true,
+one tool the course actually gives you for that problem, the fact that
+$[\log S]_T=\int\sigma^2\dd t$, and push it as far as it goes: first to check it is true,
 then to measure something real with it, then to show it has consequences in money. The project
 is therefore not an application \emph{of} the course bolted onto finance; the course result
 \emph{is} the project.
@@ -118,7 +118,7 @@ rather than decorated with it.
 My Mathematical Modelling project (MAC F314) lost marks because its supporting experiments ran
 on synthetic data when the brief asked for cited, real datasets. So the first constraint here
 was non-negotiable: \textbf{real, cited, reproducible market data}, with the simulation used
-\emph{only} where simulation is genuinely the right tool --- the verification stage, where you need to know the true
+\emph{only} where simulation is genuinely the right tool, the verification stage, where you need to know the true
 answer in order to check an estimator against it.
 \end{keybox}
 
@@ -129,7 +129,7 @@ answer in order to check an estimator against it.
 This is the single most likely hostile question, and it has a complete answer. There are four
 parts to it; any one of them would do, and together they close the question.
 
-\begin{keybox}[Part 1 --- The project does not claim Black--Scholes is right. It measures how
+\begin{keybox}[Part 1; The project does not claim Black--Scholes is right. It measures how
 wrong it is.]
 Nothing here argues that NIFTY follows geometric Brownian motion. The project
 \textbf{demonstrates the opposite}, quantitatively, and that demonstration is a result rather
@@ -143,24 +143,24 @@ than an embarrassment:
         with slope $0.664$ instead of $1$.
 \end{itemize}
 Black--Scholes is the \textbf{null hypothesis}, not the conclusion. The variance risk premium
-is \emph{defined} as a deviation from it --- you need the 1973 baseline in order to say what
+is \emph{defined} as a deviation from it, you need the 1973 baseline in order to say what
 the anomaly is a deviation \emph{from}.
 \end{keybox}
 
-\begin{keybox}[Part 2 --- The framework is not dated; it is the language all the modern models
+\begin{keybox}[Part 2; The framework is not dated; it is the language all the modern models
 are written in]
 It\^o calculus is not one model among several. Heston (1993), SABR (2002), rough volatility
-(2014), Bates jump-diffusion, local volatility --- every one of them is an SDE driven by
+(2014), Bates jump-diffusion, local volatility, every one of them is an SDE driven by
 Brownian motion, and every one is analysed with It\^o's lemma and quadratic variation. Calling
 It\^o dated is like calling differentiation dated because Newton is from 1687.
 \smallskip
 More to the point: \textbf{the central object of this project, $[\log S]_T=\int\sigma_t^2\dd t$,
 is model-free}. Quadratic variation is a property of the \emph{path}. It does not care whether
-the data-generating process is GBM, Heston, or something with jumps --- which is exactly why
+the data-generating process is GBM, Heston, or something with jumps, which is exactly why
 the P\&L identity still holds at $r=0.949$ on data that violates GBM badly.
 \end{keybox}
 
-\begin{keybox}[Part 3 --- The measurement machinery is from the 2000s, not the 1970s]
+\begin{keybox}[Part 3, The measurement machinery is from the 2000s, not the 1970s]
 \begin{table}[H]
 \centering\small
 \begin{tabular}{L{6.2cm}L{1.9cm}L{6.9cm}}
@@ -186,8 +186,8 @@ a \emph{calculator} for $\Gamma$ and $\Delta$, and the Boyle--Emanuel (1980) con
 result. Everything that does the analytical work postdates 2000.
 \end{keybox}
 
-\begin{saybox}[Part 4 --- the one-sentence answer, if you only get one sentence]
-``I am not using Black--Scholes as a theory of prices --- I am using It\^o's identity
+\begin{saybox}[Part 4, the one-sentence answer, if you only get one sentence]
+``I am not using Black--Scholes as a theory of prices, I am using It\^o's identity
 $[\log S]=\int\sigma^2\dd t$, which is model-free, to \emph{measure} volatility; Black--Scholes
 is only the null hypothesis I measure the market's deviation from, and the paper's result is
 precisely that it is rejected, with slope $0.664$ instead of $1$.''
@@ -197,7 +197,7 @@ precisely that it is rejected, with slope $0.664$ instead of $1$.''
 \textbf{``Then why not use Heston or a rough volatility model?''}
 \smallskip
 Because they would not change the answer and would weaken the argument. The P\&L
-identity~\eqref{eq:pnl2} holds for \emph{any} continuous semimartingale --- Heston included ---
+identity~\eqref{eq:pnl2} holds for \emph{any} continuous semimartingale, Heston included,
 so fitting Heston would add parameters, add estimation error, and leave the identity exactly as
 it is. The project's strength is that its central result needs \textbf{no} assumption about the
 volatility process beyond continuity, and the jump test in Section~\ref{sec:robustexp} is what
@@ -205,7 +205,7 @@ checks that one remaining assumption. Adding a stochastic-volatility model would
 \emph{assuming} what we instead \emph{measured}.
 \end{trapbox}
 
-\section{The theory --- and exactly how much of it is class material}
+\section{The theory, and exactly how much of it is class material}
 \label{sec:theory}
 
 This is the section to read before a viva. The project is deliberately built so that its spine
@@ -218,7 +218,7 @@ Finite probability spaces; binomial pricing (European, American, Asian, lookback
 $\sigma$-algebras and filtrations; conditional expectation and its five properties;
 martingales; the First Fundamental Theorem of asset pricing; Lebesgue integration; Jensen's
 inequality; \textbf{Radon--Nikod\'ym and change of measure}; modes of convergence; MCT and DCT;
-and --- directly used here --- \textbf{total and quadratic variation}.
+and, directly used here, \textbf{total and quadratic variation}.
 \end{thmbox}
 
 \begin{thmbox}[Covered in class, after the midterm]
@@ -228,11 +228,11 @@ formula}; \textbf{geometric Brownian motion}; \textbf{Black--Scholes--Merton}, i
 delta-hedging derivation of the PDE.
 \end{thmbox}
 
-\begin{trapbox}[Flagged in the course as forward material --- so, not assumed here]
+\begin{trapbox}[Flagged in the course as forward material, so, not assumed here]
 Girsanov's theorem, the Feynman--Kac formula, the Ornstein--Uhlenbeck process and
 multidimensional It\^o. The project is arranged so that \textbf{none of its results depend on
 these}. Where the risk-neutral measure appears, it appears only as the observation that $\mu$
-has dropped out of the hedging argument by itself --- which the Black--Scholes derivation done
+has dropped out of the hedging argument by itself, which the Black--Scholes derivation done
 in class already shows, without needing Girsanov to justify it.
 \end{trapbox}
 
@@ -288,7 +288,7 @@ variation), and the It\^o isometry gives the quadratic variation of the stochast
 \label{eq:qv2}
 \end{equation}
 
-\begin{whybox}[Read that backwards --- this is the whole project]
+\begin{whybox}[Read that backwards; this is the whole project]
 Forwards, \eqref{eq:qv2} is a fact about a model. Backwards it is a \textbf{measurement
 procedure}: if you observe the path, you can compute its quadratic variation by summing squared
 log-increments, and that sum estimates $\int\sigma^2\dd t$. Volatility stops being a free
@@ -323,7 +323,7 @@ therefore a much sharper test, and it is the one the verification stage runs.
 
 \subsection{Derivation 3: what a mispriced volatility is worth}
 
-This is the result that connects the measured gap to money, and it is pure class material --- It\^o's formula
+This is the result that connects the measured gap to money, and it is pure class material, It\^o's formula
 plus the Black--Scholes PDE, nothing else.
 
 Sell one call, priced and hedged at the \emph{implied} volatility $\si$, while the market
@@ -344,7 +344,7 @@ $\dd V=V_t\dd t+V_S\dd S+\half\sigma_t^2S^2V_{SS}\dd t$, so
 \dd Y=\underbrace{\Delta\,\dd S-V_S\,\dd S}_{=\,0\ \text{because }\Delta=V_S}
 +\;r(X-V_SS)\dd t-V_t\,\dd t-\half\sigma_t^2S^2V_{SS}\,\dd t .
 \]
-\textbf{The $\dd W$ terms are gone} --- that is what delta hedging is for. Substituting $V_t$
+\textbf{The $\dd W$ terms are gone}; that is what delta hedging is for. Substituting $V_t$
 from \eqref{eq:bspde} and cancelling the $rSV_S$ terms,
 \[
 \dd Y_t=rY_t\,\dd t+\half S_t^2V_{SS}\big(\si^2-\sigma_t^2\big)\dd t .
@@ -360,7 +360,7 @@ $\Gamma_t=V_{SS}$,
 ``Selling an option and delta-hedging it is a bet on variance and on nothing else. The $\dd W$
 term cancels by construction, so direction does not matter. What is left is the gap between the
 variance you charged for and the variance that happened, accumulated through time and weighted
-by dollar gamma $S^2\Gamma$ --- which is just a measure of how much the hedge is exposed at
+by dollar gamma $S^2\Gamma$, which is just a measure of how much the hedge is exposed at
 that moment. If implied exceeds realised, you make money, path by path.''
 \end{saybox}
 
@@ -369,7 +369,7 @@ that moment. If implied exceeds realised, you make money, path by path.''
 asymptotic approximation, and it does \textbf{not} require returns to be normal, independent
 or identically distributed. It needs only that $S$ is a continuous semimartingale whose
 quadratic variation is $\int\sigma_t^2\dd t$. This is the single most important defensive point
-in the project --- see \S\ref{sec:defence}.
+in the project, see \S\ref{sec:defence}.
 \end{trapbox}
 
 % =====================================================================
@@ -398,7 +398,7 @@ the two series on common dates. Zero missing values.
 
 \begin{whybox}[Why India VIX is the right instrument, and not a convenience]
 We need the market's \emph{quoted} volatility, $\si$. We could have backed it out of a single
-option price, but then the answer would depend on which strike we chose --- the skew would
+option price, but then the answer would depend on which strike we chose, the skew would
 contaminate it. India VIX is \textbf{model-free}: it is built from a strip of OTM options
 across strikes to replicate the price of a variance swap, so it estimates
 $\E^\QQ[\int\sigma^2\dd t]$ directly rather than inverting Black--Scholes at one point. That is
@@ -437,7 +437,7 @@ numbers in \texttt{SC\_Report.pdf} are reproducible from \texttt{data/*.csv} for
 The first attempt used \textbf{stooq.com}, which historically served plain CSV. It now
 responds with a JavaScript proof-of-work bot check instead of data. Defeating a bot check to
 scrape a site is not something we were willing to do, so we switched to Yahoo Finance, which
-publishes a supported client library for exactly this purpose. Worth mentioning if asked ---
+publishes a supported client library for exactly this purpose. Worth mentioning if asked;
 it shows the data source was chosen, not stumbled into.
 \end{trapbox}
 
@@ -477,7 +477,7 @@ Interest rate used & $6.5\%$ flat & \textbf{Skew of daily log returns} & $\mathb
 \end{tabular}
 \end{table}
 
-\begin{trapbox}[Do not hide the kurtosis --- lead with it]
+\begin{trapbox}[Do not hide the kurtosis, lead with it]
 Excess kurtosis $19.28$ means the daily returns are \emph{nothing like} normal; a Gaussian has
 excess kurtosis $0$. GBM assumes normal log returns. So the model we are using is, as a
 description of the data, clearly false. \textbf{Say this before the examiner does}, then give
@@ -515,7 +515,7 @@ rv   = (dlog**2).sum(axis=1)                # this is RV_n, one per path
 
 \textbf{Result.} Bias never exceeds $1.1\%$ of $IV$ and is under $0.35\%$ for $n\ge42$. The
 log--log slope is $-0.4986$ against the predicted $-0.5$. The ratio of measured to theoretical
-standard deviation stays in $[0.991,1.021]$ across the whole range --- i.e.\ the formula is
+standard deviation stays in $[0.991,1.021]$ across the whole range, i.e.\ the formula is
 right to about $2\%$ over a $128$-fold change in sampling frequency.
 
 \subsection{Measurement: applying it to the NIFTY~50}
@@ -524,12 +524,12 @@ Apply $RV_n$ over rolling 21-day windows (one listed month) and annualise. Then 
 resulting series looks like, using three standard diagnostics.
 
 \begin{itemize}[leftmargin=*,topsep=1pt,itemsep=2pt]
-\item \textbf{Clustering} --- autocorrelation of $|r_t|$ and $r_t^2$, plus Ljung--Box
+\item \textbf{Clustering}, autocorrelation of $|r_t|$ and $r_t^2$, plus Ljung--Box
       $Q(10)=n(n+2)\sum_{k=1}^{10}\hat\rho_k^2/(n-k)$, which is $\chi^2_{10}$ under the null of
       no structure.
-\item \textbf{Leverage} --- $\operatorname{corr}(r_t,\Delta\hat\sigma_t)$, the correlation
+\item \textbf{Leverage}, $\operatorname{corr}(r_t,\Delta\hat\sigma_t)$, the correlation
       between today's return and the change in measured volatility around it.
-\item \textbf{Vol-of-vol} --- standard deviation of daily changes in $\log\hat\sigma$.
+\item \textbf{Vol-of-vol}, standard deviation of daily changes in $\log\hat\sigma$.
 \end{itemize}
 
 \textbf{Results, and what each one kills:}
@@ -539,13 +539,13 @@ resulting series looks like, using three standard diagnostics.
 \toprule
 \textbf{Measurement} & \textbf{Value} & \textbf{What it rules out} \\
 \midrule
-Realised vol, mean / sd & $14.17\%$ / $8.08\%$ & --- \\
+Realised vol, mean / sd & $14.17\%$ / $8.08\%$ &, \\
 Realised vol, range & $5.37\%$ -- $88.45\%$ & that any single $\sigma$ describes the sample \\
 ACF of $|r_t|$, lag 1 / lag 42 & $+0.256$ / $+0.080$ & fast (exponential) mean reversion in vol \\
 Ljung--Box $Q(10)$, squared returns & $\mathbf{1752.1}$ (crit.\ $23.2$) & i.i.d.\ returns, overwhelmingly \\
-Ljung--Box $Q(10)$, returns & $59.3$ (crit.\ $23.2$) & \emph{also} rejected --- see the caveat below \\
+Ljung--Box $Q(10)$, returns & $59.3$ (crit.\ $23.2$) & \emph{also} rejected, see the caveat below \\
 Leverage correlation & $-0.200$ & symmetry in $W$; explains the option skew \\
-Vol-of-vol (annualised) & $99.2\%$ & constant $\sigma$ --- but see the caveat \\
+Vol-of-vol (annualised) & $99.2\%$ & constant $\sigma$, but see the caveat \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -587,7 +587,7 @@ slope $b$     & $+0.6637$ & $0.0909$ & $+7.30$ \\
 \end{tabular}
 \end{table}
 
-\textbf{Reading it.} India VIX is genuinely informative --- it explains $28\%$ of the variation
+\textbf{Reading it.} India VIX is genuinely informative; it explains $28\%$ of the variation
 in what follows, and the slope is $7.3$ standard errors above zero. But it is \textbf{biased}:
 $b=0.66$ means a one-point rise in India VIX is followed, on average, by only two-thirds of a
 point of extra realised volatility. The market overreacts to volatility news.
@@ -596,13 +596,13 @@ point of extra realised volatility. The market overreacts to volatility news.
 Using overlapping windows would give us $\sim$2{,}900 observations instead of $138$, and much
 prettier standard errors. They would also be \textbf{wrong}: adjacent overlapping windows share
 almost all of their data, so the residuals are heavily autocorrelated and the classical OLS
-standard errors understate the truth badly --- you would ``discover'' significance that is not
+standard errors understate the truth badly, you would ``discover'' significance that is not
 there. We took the smaller honest sample. If asked why $n$ is only 138, this is the answer.
 \end{whybox}
 
 \textbf{The premium.} Mean implied $16.66\%$, mean subsequent realised $14.16\%$: a gap of
 $\mathbf{+2.50}$ volatility points, positive in $76.8\%$ of the 138 months, $t=+4.04$. In
-variance terms $\E[\si^2-\sr^2]=+0.00531$ --- which is precisely the quantity that
+variance terms $\E[\si^2-\sr^2]=+0.00531$, which is precisely the quantity that
 \eqref{eq:pnl2} says a delta-hedged short option collects.
 
 \subsection{Closing the loop: from the gap to the money}
@@ -611,8 +611,8 @@ Two final tests confirm that \eqref{eq:pnl2} is not just algebra.
 
 \textbf{(i) The cost of hedging discretely.} \eqref{eq:pnl2} assumes continuous rebalancing,
 which is impossible. Boyle--Emanuel (1980) predicts that with $n$ rebalances the residual error
-has standard deviation $\propto n^{-1/2}$. On simulated GBM with $\sigma$ known exactly --- so
-discretisation is the \emph{only} source of error --- we measure a log--log slope of $-0.470$
+has standard deviation $\propto n^{-1/2}$. On simulated GBM with $\sigma$ known exactly, so
+discretisation is the \emph{only} source of error; we measure a log--log slope of $-0.470$
 across all settings, tightening monotonically to $\mathbf{-0.489}$ for $n\ge21$ where the
 asymptotic regime actually applies. The mean error is indistinguishable from zero at every $n$:
 \textbf{discrete hedging is unbiased, and it is the dispersion that costs you}.
@@ -645,11 +645,11 @@ $RV_n\to\int\sigma^2\dd t+\sum(\text{jump})^2$ and the two parts must be separat
 \[
   BV=\frac{\pi}{2}\sum_{i=2}^{n}|r_i|\,|r_{i-1}| .
 \]
-\begin{whybox}[Why multiplying neighbours kills jumps --- the idea in one line]
+\begin{whybox}[Why multiplying neighbours kills jumps, the idea in one line]
 In $RV$ a jump enters \emph{squared}: a return ten times normal contributes $100\times$. In
 $BV$ that same large $|r_i|$ is multiplied by its \textbf{neighbour}, which is a normal-sized
 return, so it contributes only $10\times$ and only to one term of the sum. As $n\to\infty$ the
-finitely many jump terms are averaged away, while the diffusive part survives --- so $BV$
+finitely many jump terms are averaged away, while the diffusive part survives, so $BV$
 estimates $\int\sigma^2\dd t$ alone, and $RV-BV$ estimates the jumps. The $\pi/2$ is
 $\big(\E|Z|\big)^{-2}$ for $Z\sim\mathcal{N}(0,1)$, which rescales $\E|r_i||r_{i-1}|$ back to a
 variance.
@@ -663,7 +663,7 @@ estimated jump-robustly by tripower variation:
    \ \sim\ \mathcal{N}(0,1)\ \text{ under ``no jumps''.}
 \]
 \textbf{Result:} over the full sample the jump share is $\mathbf{5.60\%}$ and
-$Z=+1.617$ --- below the $5\%$ critical value of $1.96$, so the no-jump null is \textbf{not}
+$Z=+1.617$, below the $5\%$ critical value of $1.96$, so the no-jump null is \textbf{not}
 rejected. Year by year it is rejected only in 2015 and 2016 (2 of 12 years). About $94\%$ of
 NIFTY quadratic variation is diffusive, which is what licenses the continuity assumption.
 
@@ -679,12 +679,12 @@ come out, and keeping them separate is the point:
 \midrule
 The \textbf{mean} & \emph{Not} a function of rebalance frequency: the spread across
 frequencies is $22.5$ points against a typical standard error of $11.9$. This is a
-\textbf{confirmation}, not a nuisance --- discrete hedging is unbiased, so frequency must not
+\textbf{confirmation}, not a nuisance, discrete hedging is unbiased, so frequency must not
 move the mean. \\
 The \textbf{dispersion} & Falls monotonically with frequency: standard deviation $230$ points
 with two rebalances, $88$ hedging daily. This is the $n^{-1/2}$ law appearing again, now in a
 real backtest rather than a simulation. \\
-The \textbf{cost drag} & Deterministic, and it grows \textbf{sublinearly} --- a log--log slope
+The \textbf{cost drag} & Deterministic, and it grows \textbf{sublinearly}, a log--log slope
 of $+0.30$ against trade count, not $+1$. The reason is worth understanding: hedging twice as
 often does \emph{not} double your trading, because each individual rebalance is smaller. \\
 \bottomrule
@@ -708,10 +708,10 @@ both of which have theory behind them.
 Splitting into disjoint sub-periods: $2015$--$2019$ gives $+24.0$ points per cycle over 59
 cycles ($t=3.22$); the COVID window $2020$--$2021$ gives $+56.9$ over 23 cycles ($t=2.91$);
 $2022$--$2026$ gives $+40.2$ over 56 cycles ($t=2.74$). Every sub-period is positive and
-individually significant, and the premium is \emph{larger} when volatility is higher --- which
+individually significant, and the premium is \emph{larger} when volatility is higher, which
 is what a risk premium is supposed to do.
 
-\section{Exactly which numerical methods were used --- and which were not}
+\section{Exactly which numerical methods were used, and which were not}
 \label{sec:methods}
 
 Every member of the group should be able to answer this section without hesitation. It is
@@ -746,7 +746,7 @@ To confirm the analytic Greeks ($3\times10^{-8}$ agreement). Not used to produce
 points & The integrand is smooth and deterministic; we need the exact target to test against. \\
 \addlinespace
 \textbf{Riemann sum along the path} & the It\^o integral in \texttt{ito\_prediction} &
-It\^o integrals use the \textbf{left endpoint} --- that is what makes them martingales. Our
+It\^o integrals use the \textbf{left endpoint}; that is what makes them martingales. Our
 loop evaluates $\Gamma$ at $t_i$ and multiplies by the increment over $[t_i,t_{i+1}]$. \\
 \addlinespace
 \textbf{OLS, implemented by hand} & \texttt{sc\_vol.ols}, Mincer--Zarnowitz &
@@ -773,7 +773,7 @@ are trying to measure. \\
 \textbf{Milstein scheme} & It would change nothing. Milstein adds
 $\half b\,b'\big((\Delta W)^2-\Delta\big)$, where $b$ is the diffusion coefficient and
 $b'=\partial b/\partial x$. In log coordinates $b=\sigma(t)$ does not depend on the state, so
-$b'=0$ and \textbf{Milstein reduces exactly to Euler}. This is worth saying out loud --- it
+$b'=0$ and \textbf{Milstein reduces exactly to Euler}. This is worth saying out loud; it
 shows the choice of scheme was reasoned, not defaulted. \\
 \addlinespace
 \textbf{Binomial / trinomial trees} & A discrete-time pricing device. We need a
@@ -789,7 +789,7 @@ from a closed-form expression, a Monte Carlo simulation, or an ordinary least-sq
 asked directly: \emph{no neural method of any kind appears in this project.} \\
 \addlinespace
 \textbf{Girsanov's theorem} & Not needed. The drift $\mu$ cancels out of the hedging argument
-by itself --- see the derivation in \S\ref{sec:theory}, where the $\dd S$ terms cancel because
+by itself, see the derivation in \S\ref{sec:theory}, where the $\dd S$ terms cancel because
 $\Delta=V_S$. Girsanov would be required to \emph{price} from scratch; we only ever
 \emph{hedge}. It is also forward material in the course. \\
 \addlinespace
@@ -802,8 +802,8 @@ instead of \emph{assuming} a process for it. \\
 \end{table}
 
 \begin{saybox}[If someone asks ``which method did you use?'' and you have five seconds]
-``Exact log-Euler Monte Carlo for the simulations --- exact because in log coordinates the GBM
-increment is closed-form --- closed-form Black--Scholes for the Greeks, a left-endpoint Riemann
+``Exact log-Euler Monte Carlo for the simulations, exact because in log coordinates the GBM
+increment is closed-form, closed-form Black--Scholes for the Greeks, a left-endpoint Riemann
 sum for the It\^o integral, and hand-written OLS for the regression. No PDE solver, no tree,
 no neural network.''
 \end{saybox}
@@ -822,7 +822,7 @@ several real businesses run every day.
 \midrule
 \textbf{Variance swaps} & The payoff is literally
 $N\times(\text{realised variance}-\text{strike})$, where realised variance is
-$\sum(\Delta\log S)^2$ --- \emph{exactly} the $RV_n$ of Section~\ref{sec:method}, annualised.
+$\sum(\Delta\log S)^2$, \emph{exactly} the $RV_n$ of Section~\ref{sec:method}, annualised.
 These trade OTC in billions of notional daily. The entire contract exists because It\^o makes
 quadratic variation a well-defined, replicable quantity. \\
 \addlinespace
@@ -832,7 +832,7 @@ market's forecast of exactly the quantity we regress in the valuation stage. \\
 \addlinespace
 \textbf{Option market-maker P\&L attribution} & Every derivatives desk decomposes each day's
 P\&L into delta, \emph{gamma}, vega and theta components. The gamma term is
-$\half S^2\Gamma\big(\si^2-\sigma_{\text{realised}}^2\big)\Delta t$ --- line for line our
+$\half S^2\Gamma\big(\si^2-\sigma_{\text{realised}}^2\big)\Delta t$, line for line our
 equation~\eqref{eq:pnl2}. A desk that cannot explain its gamma P\&L cannot explain its day. \\
 \addlinespace
 \textbf{Short-volatility strategies, and their blow-ups} & Selling options and delta-hedging is
@@ -854,14 +854,14 @@ carrying crash risk. \\
 \end{tabular}
 \end{table}
 
-\begin{whybox}[Why the premium exists at all --- the economics, not the mathematics]
+\begin{whybox}[Why the premium exists at all, the economics, not the mathematics]
 A positive variance risk premium is not a free lunch and not a market inefficiency. Options pay
 off precisely when markets crash, which is when investors most need money and when wealth is
-scarcest. Assets that pay off in bad states are therefore expensive --- their expected return
+scarcest. Assets that pay off in bad states are therefore expensive, their expected return
 is \emph{negative}, by exactly the same logic that makes insurance cost more than its actuarial
 value. Selling that insurance earns a premium as compensation for bearing the crash risk.
 \smallskip
-This is the right answer to ``if this makes money, why doesn't everyone do it?'' --- they
+This is the right answer to ``if this makes money, why doesn't everyone do it?''; they
 \emph{do}, and the compensation survives because the risk is real. Our own numbers show it:
 the strategy loses in $25\%$ of months, and the worst single cycle is $-419$ points against a
 mean of $+36$.
@@ -877,7 +877,7 @@ mean of $+36$.
 \midrule
 1 \texttt{data\_overview} & NIFTY level on a log axis; below it, India VIX against 21-day
 realised vol & That the dataset is real and complete, and that implied sits visibly above
-realised most of the time --- the premium, before any statistics. \\
+realised most of the time, the premium, before any statistics. \\
 \addlinespace
 2 \texttt{rv\_convergence} & Left: sd of $RV_n-IV$ against $n$, log--log, measured points over
 the theoretical \emph{line}. Right: bias vs $n$ & That the line is a \textbf{prediction, not a
@@ -885,16 +885,16 @@ fit}: the points land on it over a $128\times$ range. Right: bias stays inside $
 \addlinespace
 3 \texttt{vol\_clustering} & Left: ACF of $r$, $|r|$, $r^2$ with the $\pm1.96/\sqrt T$ band.
 Right: scatter of return against change in vol & Left: grey bars (returns) are near the band;
-coloured bars tower over it --- size is predictable, sign is not. Right: the downward slope is
+coloured bars tower over it, size is predictable, sign is not. Right: the downward slope is
 the leverage effect. \\
 \addlinespace
 4 \texttt{implied\_vs\_realised} & Left: realised vs implied, with the $45^\circ$ unbiasedness
 line and the fitted line. Right: the monthly gap & Left: the fitted line is visibly
-\emph{flatter} than $45^\circ$ --- that is $b=0.66$. Right: bars are mostly positive. \\
+\emph{flatter} than $45^\circ$; that is $b=0.66$. Right: bars are mostly positive. \\
 \addlinespace
 5 \texttt{hedge} + \texttt{ito\_vs\_actual} & The $n^{-1/2}$ law; cumulative P\&L; and It\^o
-prediction against realised P\&L & That the theory's two quantitative predictions --- the
-convergence rate and the P\&L identity --- both hold on data. \\
+prediction against realised P\&L & That the theory's two quantitative predictions, the
+convergence rate and the P\&L identity, both hold on data. \\
 \addlinespace
 6 \texttt{robustness} & Realised vs bipower volatility by year; net P\&L against cost; mean
 P\&L by sub-period & The three objections, pre-answered: orange and blue bars nearly equal
@@ -930,7 +930,7 @@ it is used. \\
 \texttt{sc\_vol.py} & $\sim$200 & Verification (\texttt{rv\_convergence}), measurement
 (\texttt{vol\_diagnostics}, \texttt{ljung\_box}) and valuation
 (\texttt{implied\_vs\_realised}, \texttt{ols}). \\
-\texttt{sc\_hedge.py} & $\sim$175 & \texttt{hedge\_once()} --- the self-financing hedge
+\texttt{sc\_hedge.py} & $\sim$175 & \texttt{hedge\_once()}, the self-financing hedge
 simulator, with an optional per-rebalance transaction cost; \texttt{convergence\_study()};
 \texttt{backtest()}; \texttt{ito\_prediction()}. \\
 \texttt{sc\_robust.py} & $\sim$180 & \texttt{bipower\_variation()},
@@ -980,7 +980,7 @@ circular and worthless.
 
 \begin{itemize}[leftmargin=*,topsep=1pt,itemsep=1pt]
 \item \textbf{PDE residual:} substituting the implemented price into
-      $V_t+\half\sigma^2S^2V_{SS}+rSV_S-rV$ gives $-2.212\times10^{-4}$ against $rV=65.584$ ---
+      $V_t+\half\sigma^2S^2V_{SS}+rSV_S-rV$ gives $-2.212\times10^{-4}$ against $rV=65.584$,
       a relative residual of $3.37\times10^{-6}$.
 \item \textbf{Greeks:} analytic delta against a central finite difference, $3.26\times10^{-8}$;
       gamma, relative $1.08\times10^{-7}$.
@@ -1018,19 +1018,19 @@ path. They do not break the identity that relates that number to P\&L.
 \textbf{Three.} And the verification stage is what licenses step two: it is precisely the
 demonstration that
 $\int\sigma_t^2\dd t$ can be measured accurately from a path, with a known and verified error.
-So the project's three stages are not three separate exercises --- verification earns the
+So the project's three stages are not three separate exercises, verification earns the
 right to the measurement, measurement shows the object is interesting, and valuation shows it
 is worth money.
 
 \begin{saybox}[The sentence to end on]
 ``The model is wrong about the distribution of returns and still exactly right about the
-accounting. That is not luck --- it is because the hedging identity is pathwise, and the only
+accounting. That is not luck; it is because the hedging identity is pathwise, and the only
 thing it needs from the model is the quadratic variation, which is the one thing we verified
 first.''
 \end{saybox}
 
 % =====================================================================
-\section{``This looks simple'' --- the depth inventory}
+\section{``This looks simple'', the depth inventory}
 \label{sec:depth}
 
 A project can look simple because it is, or because it has been explained well. The difference
@@ -1046,7 +1046,7 @@ non-trivial here, so that the answer exists.
 ``Volatility is the sum of squared returns'' &
 This is a \emph{theorem}, not a definition: It\^o's lemma applied to $\log S$ plus the It\^o
 isometry gives $[\log S]_T=\int\sigma_t^2\dd t$. A sum of squares estimates an SDE coefficient
-only because Brownian paths have finite non-zero quadratic variation --- the same fact that
+only because Brownian paths have finite non-zero quadratic variation, the same fact that
 makes $\int\dd W$ impossible to define pathwise as a Stieltjes integral. \\
 \addlinespace
 ``The error goes like $1/\sqrt n$'' &
@@ -1058,7 +1058,7 @@ gives a $-1/2$ slope; almost none gives the right constant. \\
 \addlinespace
 ``We delta-hedged'' &
 The P\&L identity~\eqref{eq:pnl2} is derived from the self-financing condition plus It\^o plus
-substitution of the Black--Scholes PDE, and the key step --- the $\dd W$ terms cancelling --- is
+substitution of the Black--Scholes PDE, and the key step, the $\dd W$ terms cancelling, is
 what makes the whole thing a \emph{variance} bet rather than a directional one. It is a
 pathwise ODE solution, not an expectation. \\
 \addlinespace
@@ -1070,7 +1070,7 @@ decision with a real price. \\
 \addlinespace
 ``We checked for jumps'' &
 Bipower variation, tripower quarticity, and the BNS ratio statistic with its
-$(\pi/2)^2+\pi-5$ asymptotic constant --- a 2004--05 technique requiring an understanding of
+$(\pi/2)^2+\pi-5$ asymptotic constant, a 2004--05 technique requiring an understanding of
 why multiplying adjacent absolute returns is jump-robust while squaring is not. \\
 \addlinespace
 ``We added transaction costs'' &
@@ -1080,14 +1080,14 @@ drag from the noisy mean is what makes that visible at all. \\
 \addlinespace
 ``We used Black--Scholes'' &
 With a verified implementation: PDE residual $3.4\times10^{-6}$ relative, Greeks against
-central differences to $10^{-8}$, put--call parity to six decimals --- \emph{before} any result
+central differences to $10^{-8}$, put--call parity to six decimals, \emph{before} any result
 was computed. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{saybox}[If the examiner says ``this seems straightforward'']
-``The statement is simple --- volatility is a quadratic variation. Establishing that you can
+``The statement is simple, volatility is a quadratic variation. Establishing that you can
 actually measure it is not. I had to derive the estimator's asymptotic constant and check it to
 $2\%$, prove the quadratic variation is $94\%$ diffusive rather than jumps, and show the
 hedging identity holds pathwise on data with kurtosis 19. Each of those is a place the project
@@ -1108,8 +1108,8 @@ five items below are the minimum; nobody should go in without them.
       it measurable from a single path. We verify that measurement, apply it to eleven years of
       NIFTY, and show the market prices volatility $2.5$ points too high.''
 \item \textbf{Which numerical method was used, and which was not?}\\
-      ``Exact log-Euler Monte Carlo --- exact because the GBM increment is closed-form in log
-      coordinates --- closed-form Black--Scholes Greeks, a left-endpoint Riemann sum for the
+      ``Exact log-Euler Monte Carlo, exact because the GBM increment is closed-form in log
+      coordinates, closed-form Black--Scholes Greeks, a left-endpoint Riemann sum for the
       It\^o integral, and hand-written OLS. \textbf{No PDE solver, no tree, and no neural
       network or PINN anywhere.}''
 \item \textbf{Where did the data come from?}\\
@@ -1117,23 +1117,23 @@ five items below are the minimum; nobody should go in without them.
       VIX (\texttt{\^{}INDIAVIX}), 2{,}903 trading days from January 2015 to November 2026,
       cached locally so the numbers reproduce.''
 \item \textbf{Why a 1973 model?}\\
-      ``Black--Scholes is the null hypothesis, not the conclusion --- and we reject it. The
+      ``Black--Scholes is the null hypothesis, not the conclusion, and we reject it. The
       identity we actually rely on, $[\log S]=\int\sigma^2\dd t$, is model-free, and the
       measurement tools are from 2001--2009.'' (Full answer: \S\ref{sec:1973}.)
 \item \textbf{What is the headline number and what would break it?}\\
       ``Correlation $+0.949$ between the It\^o prediction and realised P\&L across 138 months.
-      It would break if the price process had large jumps --- so we tested that, and $94\%$ of
+      It would break if the price process had large jumps, so we tested that, and $94\%$ of
       the quadratic variation is diffusive.''
 \end{enumerate}
 \end{keybox}
 
 \begin{trapbox}[The specific way the last project went wrong]
 In the Mathematical Modelling viva the group lost marks because members could not say which
-method had been used where --- in particular whether a particular neural-network method had
+method had been used where, in particular whether a particular neural-network method had
 been used at all. The fix is not more material; it is \textbf{one page that every member reads}.
 That page is \S\ref{sec:methods}, and the single most important line in it is that
 \emph{no neural method of any kind appears in this project}. If a member is unsure, the correct
-answer is never ``I think so'' --- it is the sentence in item~2 above.
+answer is never ``I think so''; it is the sentence in item~2 above.
 \end{trapbox}
 
 \begin{keybox}[Suggested division for the viva]
@@ -1154,7 +1154,7 @@ Stating these yourself is worth more than having them extracted from you.
       say this first. Both \emph{inputs} are real market data: NIFTY~50 closes, and an India
       VIX that the NSE itself builds from traded out-of-the-money NIFTY option prices by the
       variance-swap construction. But the option sold in the backtest is priced by
-      \texttt{call\_price} --- Black--Scholes evaluated at $\si$ --- rather than taken from the
+      \texttt{call\_price}, Black--Scholes evaluated at $\si$, rather than taken from the
       quoted chain at that strike and expiry. The $+36.06$ points is therefore the premium the
       model says was available at the market's own implied volatility, not a fill anyone could
       demonstrate.
@@ -1164,7 +1164,7 @@ Stating these yourself is worth more than having them extracted from you.
       Mincer--Zarnowitz test use spot and VIX alone; nothing reconstructed touches them. The
       convergence slope, the Ljung--Box statistics, the leverage correlation, the jump test and
       the $b=0.664$ regression stand regardless. What inherits the model is the \emph{level} of
-      the backtest P\&L --- not the variance gap $\si^2-\sigma_t^2$ driving it, which is
+      the backtest P\&L, not the variance gap $\si^2-\sigma_t^2$ driving it, which is
       measured from real data on both sides.
 
       \smallskip
@@ -1172,10 +1172,10 @@ Stating these yourself is worth more than having them extracted from you.
       Black--Scholes inverted at a single strike, so the volatility input is the market's and
       not ours; and an at-the-money call is exactly where the skew correction to a
       Black--Scholes premium is smallest. \textbf{The honest next version is the NSE option
-      chain with its bid--ask} --- volunteer that before he reaches for it.
+      chain with its bid--ask}, volunteer that before he reaches for it.
 \item \textbf{Costs are modelled, not measured.} The robustness section applies a proportional
       cost in basis points; it omits margin funding, market impact, and the bid--ask on the
-      option itself. The sweep shows the premium survives to roughly $10$~bps round trip --- that
+      option itself. The sweep shows the premium survives to roughly $10$~bps round trip; that
       is the claim, not that a desk would realise it net. \textbf{Do not claim an optimal
       rebalance frequency.} At zero cost the mean P\&L across frequencies is not statistically
       distinguishable (spread $22.5$ points against a typical standard error of $11.9$); what a
@@ -1185,7 +1185,7 @@ Stating these yourself is worth more than having them extracted from you.
 \item \textbf{Maturity mismatch.} India VIX is a 30-calendar-day index; our cycle is 21
       trading days ($\approx$30 calendar days, but not exactly). This biases the \emph{level}
       of $\si$ slightly. It does not affect the sign of the gap or the correlation result.
-\item \textbf{Daily closes only.} $RV_n$ at daily frequency is coarse --- verification shows it is
+\item \textbf{Daily closes only.} $RV_n$ at daily frequency is coarse, verification shows it is
       unbiased, but its one-month standard error is material. Intraday data would sharpen both
       the measurement and valuation considerably. Also, close-to-close sampling puts overnight jumps into $RV$ but
       not into the hedge, which cannot rebalance overnight.
@@ -1201,7 +1201,7 @@ Stating these yourself is worth more than having them extracted from you.
 \section{How to present this (15--20 minutes)}
 
 The brief allots 15--20 minutes for the viva. Plan for about twelve minutes of material and
-leave the rest for questions --- the questions are where the marks move.
+leave the rest for questions; the questions are where the marks move.
 
 \begin{table}[H]
 \centering\small
@@ -1216,12 +1216,12 @@ it is measurable.'' \\
 \addlinespace
 1:30--4:00 & Verification &
 ``Before measuring anything real, check the ruler. We simulate with a $\sigma(t)$ we chose, so
-we know the true answer. Theory predicts not just the rate but the constant --- and we match it
+we know the true answer. Theory predicts not just the rate but the constant, and we match it
 to $2\%$ over a $128\times$ range.'' \\
 \addlinespace
 4:00--6:00 & Measurement &
 ``Now point it at eleven years of NIFTY. Volatility moves between $5\%$ and $88\%$, clusters
-enormously, and rises when the market falls. Constant-$\sigma$ GBM is wrong --- and we can say
+enormously, and rises when the market falls. Constant-$\sigma$ GBM is wrong, and we can say
 exactly how.'' \\
 \addlinespace
 6:00--8:00 & Valuation &
@@ -1229,7 +1229,7 @@ exactly how.'' \\
 market overreacts, by $2.5$ volatility points on average.'' \\
 \addlinespace
 8:00--10:00 & The payoff &
-Derive \eqref{eq:pnl2} on the board --- four lines, pure course material --- then show the
+Derive \eqref{eq:pnl2} on the board, four lines, pure course material, then show the
 scatter: $r=0.949$. \\
 \addlinespace
 10:00--12:00 & Robustness &
@@ -1238,7 +1238,7 @@ variation is diffusive. Costs: the premium survives to $5$ basis points. Luck: e
 sub-period is positive.'' \\
 \addlinespace
 12:00+ & Questions &
-Lead with the two you want asked --- the 1973 question and the kurtosis question. Both have
+Lead with the two you want asked, the 1973 question and the kurtosis question. Both have
 prepared answers (\S\ref{sec:1973}, \S\ref{sec:defence}). \\
 \bottomrule
 \end{tabular}
@@ -1255,7 +1255,7 @@ $\mathbf{+28.8}$ points (net premium at a realistic $2$~bps, $t=3.81$).
 
 \begin{trapbox}[Three things to say before you are asked]
 \textbf{1.} ``Black--Scholes here is the null hypothesis, and we reject it.'' \\
-\textbf{2.} ``The returns are not normal --- excess kurtosis $19$ --- and the identity does not
+\textbf{2.} ``The returns are not normal, excess kurtosis $19$, and the identity does not
 need them to be, because it is pathwise.'' \\
 \textbf{3.} ``The P\&L is net of modelled transaction costs, and it survives them.''
 \smallskip
@@ -1279,7 +1279,7 @@ understand your own work. It also pre-empts roughly half the questions.
 \item \emph{Why only 138 observations?} $\to$ Non-overlapping windows, deliberately, so the
       standard errors are honest.
 \item \emph{Is this a money-making strategy?} $\to$ No, and the report says so: it measures a
-      risk premium, which is compensation for a real risk --- $25\%$ of months lose, the worst
+      risk premium, which is compensation for a real risk, $25\%$ of months lose, the worst
       one by $419$ points.
 \end{itemize}
 \end{qabox}

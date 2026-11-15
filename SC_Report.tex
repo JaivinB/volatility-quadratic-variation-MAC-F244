@@ -14,7 +14,7 @@ measuring it, forecasting it, and pricing it on the NIFTY~50}}
 \author{%
 \small Jaivin Bengani (2024ADPS0850G) \textbullet\ Purunjay Karwa (2024ADPS0857G) \textbullet\ Soham Agrawal (2024ADPS0829G)\\
 \small Vrishank Bimlesh Rao (2024ADPS0871G) \textbullet\ Bhagyesh (2024ADPS0863G)\\[2pt]
-MAC F244 --- Stochastic Calculus and Applications to Finance\\
+MAC F244: Stochastic Calculus and Applications to Finance\\
 \small Instructor: Prof.\ Mayank Goel \textbullet\ BITS Pilani, K.\ K.\ Birla Goa Campus}
 \date{15 November 2026}
 
@@ -31,21 +31,21 @@ quantitative consequence. The measurement is first verified where the answer is 
 $\sigma(t)$ time-varying and specified in advance, realised variance converges to integrated
 variance at log--log slope $-0.4986$ against the predicted $-1/2$, its dispersion matching the
 closed form $\sqrt{(2T/n)\!\int\!\sigma_t^4\dd t}$ to within $2.1\%$ across a $128\times$ range
-of sampling frequency --- a check of the constant, not merely the rate. Applied to eleven years of NIFTY~50, volatility proves strongly clustered (Ljung--Box
+of sampling frequency, which tests the constant and not merely the rate. Applied to eleven years of NIFTY~50, volatility proves strongly clustered (Ljung--Box
 $Q(10)=1752$ on squared returns against $\chi^2_{10}$ critical value $23.2$), asymmetric
 (leverage correlation $-0.200$), and spans $5.4\%$ to $88.5\%$: constant-$\sigma$ GBM fails in
 a specific, measurable way. We then price the market's own volatility quote. India VIX is a
 \emph{biased} forecast of what follows (Mincer--Zarnowitz slope $0.664$, s.e.\ $0.091$,
 $t_{b=1}=-3.70$), and the resulting $+2.50$ volatility points of premium ($t=4.04$) is exactly
-what It\^o's lemma says a delta-hedged short option monetises --- over 138 non-overlapping
+what It\^o's lemma says a delta-hedged short option monetises. Over 138 non-overlapping
 months the pathwise It\^o prediction correlates with realised P\&L at $r=+0.949$.
 \end{abstract}
 \vspace{-0.2cm}
 
 \section{Purpose and scope}
 
-Black--Scholes requires five inputs. Four of them --- spot, strike, time to maturity and the
-interest rate --- are directly observable. The fifth, the volatility $\sigma$, is not, and the
+Black--Scholes requires five inputs. Four of them (spot, strike, time to maturity and the
+interest rate) are directly observable. The fifth, the volatility $\sigma$, is not, and the
 derivation done in class treats it as given. \textbf{The purpose of this project is to show
 that It\^o calculus removes that asymmetry}: the same identity $(\dd W)^2=\dd t$ that produces
 the $\half\sigma^2S^2V_{SS}$ term in the Black--Scholes PDE also identifies $\sigma$ with the
@@ -58,8 +58,8 @@ both on simulated paths whose volatility is specified in advance, so the answer 
 independently. \textbf{Measurement} applies the verified estimator to eleven years of NIFTY~50
 and establishes which assumptions of constant-$\sigma$ GBM fail, and by how much.
 \textbf{Valuation} compares measured volatility against the volatility the options market
-quotes and uses It\^o's lemma to derive --- then confirm --- what the discrepancy is worth to a
-delta-hedged position.
+quotes, then uses It\^o's lemma to derive and afterwards confirm what that discrepancy is
+worth to a delta-hedged position.
 
 \section{Theoretical framework}
 
@@ -93,7 +93,7 @@ its accuracy before Section~\ref{sec:measure} relies on it.
 \section{Data}
 
 Daily closes for the NIFTY~50 (\texttt{\^{}NSEI}) and the India VIX (\texttt{\^{}INDIAVIX})
-were taken from Yahoo Finance via the \texttt{yfinance} client (v1.8.0), auto-adjusted and
+were taken from Yahoo Finance via the \texttt{yfinance} client (v1.8.0) \cite{nsedata}, auto-adjusted and
 intersected on common dates: \textbf{2,903 trading days, 2~January~2015 to 12~November~2026},
 no missing values. India VIX is the NSE's model-free 30-day implied volatility index, built
 from out-of-the-money NIFTY option prices by the variance-swap construction, quoted in
@@ -147,7 +147,7 @@ constant.
 \centering
 \includegraphics[width=0.52\linewidth]{figures/rv_convergence.pdf}
 \caption{Left: dispersion of $RV_n-IV$ (points) against the closed form~\eqref{eq:rvse}
-(line) --- a prediction, not a fit. Right: the estimator is unbiased throughout.}
+(line), which is a prediction and not a fit. Right: the estimator is unbiased throughout.}
 \end{figure}
 
 \section{Measurement: NIFTY volatility, and where GBM breaks}
@@ -163,10 +163,10 @@ returns against a $1\%$ critical value of $23.2$; volatility is overwhelmingly p
 its own past, where constant-$\sigma$ GBM implies zero autocorrelation at every lag.
 \textbf{Returns are close to, but not exactly, unpredictable:} $Q(10)=59.3$ on the returns
 themselves also exceeds $23.2$, driven mainly by lags 5 and 10. Return autocorrelation is small
-but statistically detectable --- an order of magnitude weaker than the variance structure, not
-zero. \textbf{Asymmetry:} $\operatorname{corr}(r_t,\Delta\hat\sigma_t)=-0.200$, so volatility
+but statistically detectable, an order of magnitude weaker than the variance structure though
+not zero. \textbf{Asymmetry:} $\operatorname{corr}(r_t,\Delta\hat\sigma_t)=-0.200$, so volatility
 rises on down moves; GBM is symmetric in $W$ and cannot produce this, which is why the real
-option surface carries a skew. \textbf{Vol-of-vol:} $99.2\%$ annualised --- an \emph{upper
+option surface carries a skew. \textbf{Vol-of-vol:} $99.2\%$ annualised, an \emph{upper
 bound}, since differencing a 21-day window daily injects measurement noise. No result depends
 on it.
 
@@ -181,8 +181,8 @@ realised on implied (Mincer--Zarnowitz),
   \hat a=0.0310\ (0.0163),\quad \hat b=0.6637\ (0.0909),\quad R^2=0.282 .
 \]
 Unbiasedness requires $a=0$, $b=1$; the slope is rejected, $t_{b=1}=-3.70$. Implied volatility
-is informative --- it explains $28\%$ of the variation in what follows and $\hat b$ is $7.3$
-standard errors from zero --- but it \textbf{overreacts}: a one-point rise in India VIX is
+is informative, since it explains $28\%$ of the variation in what follows and $\hat b$ is $7.3$
+standard errors from zero, but it \textbf{overreacts}: a one-point rise in India VIX is
 followed on average by only two-thirds of a point of extra realised volatility. The intercept
 is positive but insignificant at $5\%$ ($t=+1.91$). Cycles are non-overlapping precisely so
 these standard errors are not inflated by the serial correlation overlapping windows induce.
@@ -214,8 +214,8 @@ unavailable; with $n$ rebalances the residual has standard deviation $\propto n^
 across all settings, tightening monotonically to $\mathbf{-0.489}$ for $n\ge21$, with mean
 error indistinguishable from zero: discrete hedging is unbiased, and it is the dispersion that
 costs. \textbf{(ii) The identity on real paths.} Evaluating~\eqref{eq:pnl} along each realised
-NIFTY path and comparing with the hedged position's actual P\&L --- computed independently by
-a self-financing accounting simulation --- gives $\operatorname{corr}=\mathbf{+0.949}$
+NIFTY path and comparing with the hedged position's actual P\&L, computed independently by
+a self-financing accounting simulation, gives $\operatorname{corr}=\mathbf{+0.949}$
 (predicted $+39.2$ points per cycle against actual $+36.1$). The trade earns $+36.06$ points
 per cycle, $+11.31\%$ of premium, s.d.\ $88.30$, positive in $74.6\%$ of cycles, $t=4.80$
 ($p=4.1\times10^{-6}$), cumulating to $+4{,}977$ points.
@@ -234,10 +234,10 @@ equation~\eqref{eq:pnl} evaluated pathwise against realised P\&L, 138 cycles.}
 
 \begin{keybox}[Why the P\&L identity survives data the model does not describe]
 NIFTY log returns have excess kurtosis $19.3$ and skew $-1.27$, and Section~\ref{sec:measure}
-shows volatility is neither constant nor symmetric, so $r=0.949$ needs an explanation rather
-than a celebration. It is this: \eqref{eq:pnl} is a \emph{pathwise} consequence of It\^o's
+shows volatility is neither constant nor symmetric, so $r=0.949$ requires an explanation.
+It is this: \eqref{eq:pnl} is a \emph{pathwise} consequence of It\^o's
 lemma, deriving only from $S$ being a continuous semimartingale with quadratic variation
-$\int\sigma_t^2\dd t$ --- the object Section~\ref{sec:verify} verified. It never uses
+$\int\sigma_t^2\dd t$, the object Section~\ref{sec:verify} verified. It never uses
 normality, independence or constancy of $\sigma$. Fat tails and clustering change \emph{what}
 $\int\sigma_t^2\dd t$ turns out to be; they do not break the identity relating it to P\&L.
 \end{keybox}
@@ -245,12 +245,12 @@ $\int\sigma_t^2\dd t$ turns out to be; they do not break the identity relating i
 \section{Robustness}
 \label{sec:robust}
 
-Three objections are answered by computation rather than by argument.
+Three objections are answered by computation.
 
 \textbf{Jumps.} Identity~\eqref{eq:qv} assumes a \emph{continuous} semimartingale; if the price
 jumps, $RV_n$ converges to $\int\sigma_t^2\dd t+\sum(\text{jump})^2$. Bipower variation
-$BV=\tfrac{\pi}{2}\sum|r_i||r_{i-1}|$ is jump-robust --- a lone large $|r_i|$ is multiplied by a
-normal-sized neighbour --- and still estimates $\int\sigma_t^2\dd t$, so $RV-BV$ estimates the
+$BV=\tfrac{\pi}{2}\sum|r_i||r_{i-1}|$ is jump-robust, because a lone large $|r_i|$ is multiplied by a
+normal-sized neighbour, and still estimates $\int\sigma_t^2\dd t$, so $RV-BV$ estimates the
 jump part \cite{bns2004}. The full-sample jump share is $\mathbf{5.60\%}$ and the
 Barndorff-Nielsen--Shephard ratio statistic is $Z=+1.617$, \textbf{short of the $5\%$ critical
 value $1.96$}; year by year the no-jump null is rejected in only 2 of 12 years.
@@ -258,8 +258,8 @@ value $1.96$}; year by year the no-jump null is rejected in only 2 of 12 years.
 is empirically adequate here.
 
 \textbf{Transaction costs.} A proportional cost on every rebalance separates two effects. At
-zero cost the mean P\&L is \emph{not} a function of rebalance frequency --- spread $22.5$
-points against a typical standard error of $11.9$ --- exactly as unbiasedness requires; what
+zero cost the mean P\&L is \emph{not} a function of rebalance frequency (spread $22.5$
+points against a typical standard error of $11.9$), exactly as unbiasedness requires; what
 frequency buys is dispersion, the standard deviation falling from $230$ points (two
 rebalances) to $88$ (daily). The cost drag is deterministic and grows \textbf{sublinearly},
 log--log slope $+0.30$ against trade count rather than $+1$, because rebalancing more often
@@ -270,12 +270,12 @@ near $10$~bps. Indian index-futures round trips sit at the low end of that range
 
 \textbf{Regime stability.} On disjoint sub-periods the result holds throughout:
 $2015$--$2019$ gives $+24.0$ points per cycle ($t=3.22$), COVID $2020$--$2021$ gives $+56.9$
-($t=2.91$), $2022$--$2026$ gives $+40.2$ ($t=2.74$) --- larger when volatility is higher, as a
+($t=2.91$), $2022$--$2026$ gives $+40.2$ ($t=2.74$), larger when volatility is higher, as a
 risk premium should be.
 
 \begin{figure}[tbp]
 \centering
-\includegraphics[width=0.60\linewidth]{figures/robustness.pdf}
+\includegraphics[width=0.56\linewidth]{figures/robustness.pdf}
 \caption{Left: realised against jump-robust bipower volatility, by year. Centre: net P\&L
 against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.}
 \end{figure}
@@ -283,8 +283,8 @@ against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.
 \section{Limitations}
 \vspace{-0.15cm}
 \begin{itemize}[leftmargin=*,topsep=0pt,itemsep=0.5pt]
-  \item \textbf{The premium is reconstructed, not quoted.} Both inputs are market data ---
-        NIFTY closes, and an India VIX built from traded NIFTY option prices --- but the option
+  \item \textbf{The premium is reconstructed, not quoted.} Both inputs are market data:
+        NIFTY closes, and an India VIX built from traded NIFTY option prices. But the option
         sold in Section~\ref{sec:value} is Black--Scholes at $\si$, not a quote from the chain
         at that strike and expiry. Section~\ref{sec:measure} and the forecast test use spot and
         VIX alone; what inherits the model is the \emph{level} of the backtest P\&L, not the
@@ -296,7 +296,7 @@ against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.
   \item \textbf{Daily closes only, and limited scope.} $RV_n$ at daily frequency is coarse;
         intraday data would sharpen it and the jump test, whose asymptotics are weak at
         $n\approx250$. Close-to-close sampling puts untradeable overnight gaps into $RV$. India
-        VIX is a 30-calendar-day index on a 21-trading-day cycle --- a bias in the level of
+        VIX is a 30-calendar-day index on a 21-trading-day cycle, a bias in the level of
         $\si$, not the sign of the gap. One index, at-the-money calls, flat $r$.
 \end{itemize}
 
@@ -305,7 +305,7 @@ against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.
 Volatility in the It\^o framework is a quadratic variation, and that is not a formality: it
 makes volatility measurable from one path, gives the estimator a verifiable rate \emph{and}
 constant, and supplies the pathwise identity~\eqref{eq:pnl} turning a forecast error into a
-P\&L. The NIFTY~50 bears this out --- the estimator behaves as predicted, $94\%$ of the
+P\&L. The NIFTY~50 bears this out: the estimator behaves as predicted, $94\%$ of the
 quadratic variation is diffusive, the index violates constant-$\sigma$ GBM through clustering
 and asymmetry rather than at random, India VIX overreacts with slope $0.66$, and the resulting
 premium is recovered at correlation $0.949$ with what It\^o predicts and survives realistic
@@ -325,6 +325,8 @@ parity to six decimals.
 \setlength{\itemsep}{-1pt}
 \bibitem{boyle1980} Boyle, P.\,P.\ and Emanuel, D. (1980). Discretely adjusted option hedges.
   \emph{J.\ Financial Economics} \textbf{8}(3), 259--282.
+\bibitem{nsedata} NSE India, India VIX methodology; daily closes via Yahoo Finance
+  (\texttt{yfinance}~v1.8.0), \texttt{\^{}NSEI} and \texttt{\^{}INDIAVIX}, 2015--2026.
 \bibitem{bs1973} Black, F.\ and Scholes, M. (1973). The pricing of options and corporate
   liabilities. \emph{J.\ Political Economy} \textbf{81}(3), 637--654.
 \bibitem{shreve2004} Shreve, S.\,E. (2004). \emph{Stochastic Calculus for Finance II}. Springer.
