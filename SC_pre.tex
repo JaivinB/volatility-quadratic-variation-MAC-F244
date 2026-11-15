@@ -1,0 +1,53 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[colorlinks=true,linkcolor=teal,urlcolor=blue,citecolor=teal]{hyperref}
+
+\definecolor{cQ}{HTML}{1F4E79}      \definecolor{cQBg}{HTML}{F0F5FA}
+\definecolor{cKey}{HTML}{1B5E20}    \definecolor{cKeyBg}{HTML}{E8F5E9}
+\definecolor{cTrap}{HTML}{B71C1C}   \definecolor{cTrapBg}{HTML}{FFEBEE}
+\definecolor{cWhy}{HTML}{4A148C}    \definecolor{cWhyBg}{HTML}{F3E5F5}
+\definecolor{cThm}{HTML}{E65100}    \definecolor{cThmBg}{HTML}{FFF3E0}
+\definecolor{cNew}{HTML}{AD1457}    \definecolor{cNewBg}{HTML}{FCE4EC}
+\definecolor{cSay}{HTML}{01579B}    \definecolor{cSayBg}{HTML}{E1F5FE}
+\definecolor{cNote}{HTML}{616161}
+
+\newtcolorbox{keybox}[1][]{breakable,enhanced,colback=cKeyBg,colframe=cKey,
+  boxrule=1pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,coltitle=black,title={#1}}
+\newtcolorbox{whybox}[1][]{breakable,enhanced,colback=cWhyBg,colframe=cWhy,
+  boxrule=0.8pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,title={#1}}
+\newtcolorbox{thmbox}[1][]{breakable,enhanced,colback=cThmBg,colframe=cThm,
+  boxrule=1pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,coltitle=black,title={#1}}
+\newtcolorbox{trapbox}[1][]{breakable,enhanced,colback=cTrapBg,colframe=cTrap,
+  boxrule=0.7pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,title={#1}}
+\newtcolorbox{freshbox}[1][]{breakable,enhanced,colback=cNewBg,colframe=cNew,
+  boxrule=1pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,coltitle=black,title={#1}}
+\newtcolorbox{saybox}[1][Say this]{breakable,enhanced,colback=cSayBg,colframe=cSay,
+  boxrule=0.8pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,title={#1}}
+\newtcolorbox{qabox}[1][]{breakable,enhanced,colback=cQBg,colframe=cQ,
+  boxrule=0.7pt,left=5pt,right=5pt,top=4pt,bottom=4pt,arc=2pt,
+  fonttitle=\bfseries\sffamily,title={#1}}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\half}{\tfrac{1}{2}}
+\newcommand{\si}{\sigma_{\mathrm{imp}}}
+\newcommand{\sr}{\sigma_{\mathrm{real}}}
+\captionsetup{font=small,labelfont=bf}

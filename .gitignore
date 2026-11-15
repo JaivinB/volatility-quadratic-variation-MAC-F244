@@ -1,0 +1,30 @@
+# ---- LaTeX build artefacts (regenerate with `latexmk -pdf`) ----
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---- macOS ----
+.DS_Store
+
+# ---- Orphaned figures from an earlier framing of the project.
+# Not produced by the current sc_figures.py and not cited by either
+# document. Left on disk, kept out of the repo.
+figures/backtest.*
+figures/convergence.*
+figures/returns_diagnostics.*
