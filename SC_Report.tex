@@ -273,7 +273,7 @@ risk premium should be.
 
 \begin{figure}[tbp]
 \centering
-\includegraphics[width=0.74\linewidth]{figures/robustness.pdf}
+\includegraphics[width=0.60\linewidth]{figures/robustness.pdf}
 \caption{Left: realised against jump-robust bipower volatility, by year. Centre: net P\&L
 against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.}
 \end{figure}
@@ -281,17 +281,21 @@ against transaction cost. Right: mean P\&L by sub-period, $\pm1$ standard error.
 \section{Limitations}
 \vspace{-0.15cm}
 \begin{itemize}[leftmargin=*,topsep=0pt,itemsep=0.5pt]
+  \item \textbf{The premium is reconstructed, not quoted.} Both inputs are market data ---
+        NIFTY closes, and an India VIX built from traded NIFTY option prices --- but the option
+        sold in Section~\ref{sec:value} is Black--Scholes at $\si$, not a quote from the chain
+        at that strike and expiry. Section~\ref{sec:measure} and the forecast test use spot and
+        VIX alone; what inherits the model is the \emph{level} of the backtest P\&L, not the
+        variance gap driving it. A model-free $\si$ and an at-the-money strike bound the error;
+        replicating this on the NSE chain, bid--ask included, would settle it.
   \item \textbf{Costs are modelled, not measured.} Section~\ref{sec:robust} applies a
-        proportional cost; it omits the bid--ask on the option itself, margin funding and
-        market impact. The conclusion is that the premium survives plausible costs, not that a
-        desk would realise it net.
+        proportional cost; it omits margin funding and market impact. The premium survives
+        plausible costs; that is not the claim that a desk would realise it net.
   \item \textbf{Daily closes only, and limited scope.} $RV_n$ at daily frequency is coarse;
-        intraday data would sharpen the measurement and the jump test, whose asymptotics are
-        weak at $n\approx250$. Close-to-close sampling puts overnight gaps into $RV$ that the
-        hedge cannot trade. India VIX is a 30-calendar-day index matched to a 21-trading-day
-        cycle --- a bias in the level of $\si$, not the sign of the gap. One index,
-        at-the-money calls, flat $r$: the skew appears in the leverage effect but is never
-        priced.
+        intraday data would sharpen it and the jump test, whose asymptotics are weak at
+        $n\approx250$. Close-to-close sampling puts untradeable overnight gaps into $RV$. India
+        VIX is a 30-calendar-day index on a 21-trading-day cycle --- a bias in the level of
+        $\si$, not the sign of the gap. One index, at-the-money calls, flat $r$.
 \end{itemize}
 
 \section{Conclusion}

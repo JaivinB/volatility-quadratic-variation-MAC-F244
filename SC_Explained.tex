@@ -1150,13 +1150,38 @@ and the five answers above cold.
 Stating these yourself is worth more than having them extracted from you.
 
 \begin{enumerate}[leftmargin=*,topsep=1pt,itemsep=3pt]
-\item \textbf{The P\&L is gross of transaction costs.} This is the big one. Twenty-one
-      rebalances a month in index futures, plus the bid--ask on the option, would plausibly
-      consume a large share of $36$ points. \textbf{The project measures a premium; it does not
-      claim a tradeable strategy}, and the report says so explicitly. If pressed: the natural
-      next experiment is to add a per-trade cost and find the rebalance frequency that
-      maximises net P\&L --- there is a genuine optimum, because hedging error falls as
-      $\sqrt n$ while costs grow as $n$.
+\item \textbf{The option premium is reconstructed, not quoted.} If he asks about the data,
+      say this first. Both \emph{inputs} are real market data: NIFTY~50 closes, and an India
+      VIX that the NSE itself builds from traded out-of-the-money NIFTY option prices by the
+      variance-swap construction. But the option sold in the backtest is priced by
+      \texttt{call\_price} --- Black--Scholes evaluated at $\si$ --- rather than taken from the
+      quoted chain at that strike and expiry. The $+36.06$ points is therefore the premium the
+      model says was available at the market's own implied volatility, not a fill anyone could
+      demonstrate.
+
+      \smallskip
+      \textbf{What this does and does not contaminate.} Verification, measurement and the
+      Mincer--Zarnowitz test use spot and VIX alone; nothing reconstructed touches them. The
+      convergence slope, the Ljung--Box statistics, the leverage correlation, the jump test and
+      the $b=0.664$ regression stand regardless. What inherits the model is the \emph{level} of
+      the backtest P\&L --- not the variance gap $\si^2-\sigma_t^2$ driving it, which is
+      measured from real data on both sides.
+
+      \smallskip
+      \textbf{Two things bound the error.} $\si$ is the model-free index rather than
+      Black--Scholes inverted at a single strike, so the volatility input is the market's and
+      not ours; and an at-the-money call is exactly where the skew correction to a
+      Black--Scholes premium is smallest. \textbf{The honest next version is the NSE option
+      chain with its bid--ask} --- volunteer that before he reaches for it.
+\item \textbf{Costs are modelled, not measured.} The robustness section applies a proportional
+      cost in basis points; it omits margin funding, market impact, and the bid--ask on the
+      option itself. The sweep shows the premium survives to roughly $10$~bps round trip --- that
+      is the claim, not that a desk would realise it net. \textbf{Do not claim an optimal
+      rebalance frequency.} At zero cost the mean P\&L across frequencies is not statistically
+      distinguishable (spread $22.5$ points against a typical standard error of $11.9$); what a
+      higher frequency buys is lower dispersion, not a higher mean. Reading an optimum out of
+      that table is reading noise, and that is the kind of overclaim that costs credibility on
+      everything else in the room.
 \item \textbf{Maturity mismatch.} India VIX is a 30-calendar-day index; our cycle is 21
       trading days ($\approx$30 calendar days, but not exactly). This biases the \emph{level}
       of $\si$ slightly. It does not affect the sign of the gap or the correlation result.
